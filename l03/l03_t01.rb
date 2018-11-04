@@ -35,8 +35,6 @@ def solving(text, translation, input)
     encrypted = text.gsub(/[^#{input}]/, '*')
     return encrypted
 end
-print "Введите никнейм: "
-system('cls')
 while ex == false
     words = File.readlines('noun_dictionary.txt').each {|l| l.chomp!}
     text = words.sample
@@ -65,10 +63,11 @@ while ex == false
     end
     post_options[:body][:score] = score
     response = HTTParty.post(site, post_options)
-    puts "ban"
     puts score
     response = HTTParty.get(site, get_options)
     arr = JSON.parse(response.body).to_a
     puts "User: #{arr[-1]['user']}\nScore: #{arr[-1]['score']}"
+    sleep(1.5)
+    system('cls')
 end
 gets
